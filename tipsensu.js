@@ -214,7 +214,7 @@ var moneyList = new Vue({
                 "name": "Monacoin-Testnet",
                 "code": "MONAT",
                 "active": true,
-                "imgUrl": "./notimage.png"
+                "imgUrl": "https://raw.githubusercontent.com/monacoinproject/monacoin/master-0.15/src/qt/res/icons/bitcoin_testnet.ico"
             },
             {
                 "name": "BitZeny-Testnet",
