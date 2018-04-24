@@ -139,6 +139,12 @@ var moneyList = new Vue({
                 "imgUrl": "https://assets.coingecko.com/coins/images/1129/large/phore.png"
             },
             {
+                "name": "SanDeGo",
+                "code": "SDGO",
+                "active": true,
+                "imgUrl": "https://cdn.discordapp.com/icons/436137166523858945/fdba5c2f86d8a96c640790ef7b4084b3.webp"
+            },
+            {
                 "name": "SHIELD",
                 "code": "XSH",
                 "active": true,
@@ -191,12 +197,6 @@ var moneyList = new Vue({
                 "code": "KOTO",
                 "active": false,
                 "imgUrl": "https://cdn.discordapp.com/icons/400107631810969609/5830c763cda4ab9eebf45cbf6f5da09b.webp"
-            },
-            {
-                "name": "SanDeGo",
-                "code": "SDG",
-                "active": false,
-                "imgUrl": "https://cdn.discordapp.com/icons/436137166523858945/fdba5c2f86d8a96c640790ef7b4084b3.webp"
             },
             {
                 "name": "NANJCOIN",
