@@ -17,6 +17,29 @@ var tipData = new Vue({
         imgUrl: '',
         amount: '3.90000000',
         urlBase: 'https://twitter.com/intent/tweet?text=@tipsensu%20tip%20',
+        flg1: false,
+        flg2: false,
+        flg3: false,
+        tipButtonActive: false,
+    },
+    methods: {
+        activeCheck: function () {
+            if (this.code !== '') {
+                this.flg1 = true;
+            } else {
+                this.flg1 = false;
+            }
+            if (this.name !== '') {
+                this.flg2 = true;
+            } else {
+                this.flg2 = false;
+            }
+            if( this.flg1 === true && this.flg2 === false){
+                this.tipButtonActive = true;
+            } else {
+                this.tipButtonActive = false;
+            }
+        }
     },
     created: function () {
         var arg = new Object;
@@ -122,6 +145,12 @@ var moneyList = new Vue({
                 "imgUrl": "https://cdn.discordapp.com/icons/369187680442908686/15caaf794562679f7858e3cfbb660888.webp"
             },
             {
+                "name": "VIP☆STAR COIN",
+                "code": "VIPS",
+                "active": true,
+                "imgUrl": "https://cdn.discordapp.com/icons/414304092282945537/006429685a4f1265d53a7c36081f2154.webp"
+            },
+            {
                 "name": "StrongHands",
                 "code": "SHND",
                 "active": true,
@@ -164,6 +193,12 @@ var moneyList = new Vue({
                 "imgUrl": "https://cdn.discordapp.com/icons/400107631810969609/5830c763cda4ab9eebf45cbf6f5da09b.webp"
             },
             {
+                "name": "SanDeGo",
+                "code": "SDG",
+                "active": false,
+                "imgUrl": "https://cdn.discordapp.com/icons/436137166523858945/fdba5c2f86d8a96c640790ef7b4084b3.webp"
+            },
+            {
                 "name": "NANJCOIN",
                 "code": "NANJ",
                 "active": false,
@@ -192,8 +227,9 @@ var moneyList = new Vue({
     methods: {
         setCode: function (getcode, money, url) {
             tipData.code = getcode;
-            tipData.moneyName = money
-            tipData.imgUrl = url
+            tipData.moneyName = money;
+            tipData.imgUrl = url;
+            tipData.activeCheck();
         }
     }
 })
