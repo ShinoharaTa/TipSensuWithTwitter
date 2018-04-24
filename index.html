@@ -21,13 +21,13 @@
     <meta property="og:description" content="投げ銭Bot Sensuを使用して、Twitterで投げ銭を行います。リンク対応、寄付募集リンク等にもご利用可能！">
     <meta property="og:type" content="website">
     <meta property="og:url" content="">
-    <meta property="og:image" content="./sensu_og.png">
+    <meta property="og:image" content="https://shinoharata.github.io/TipSensuWithTwitter/sensu_og.png">
     <!-- <meta property="fb:app_id" content="App-ID（15文字の半角数字）" /> -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@SHINOHARATTT">
     <meta name="twitter:title" content="TIP SENSU with Twitter | Twitterで投げ銭しよう" />
     <meta name="twitter:description" content="投げ銭Bot Sensuを使用して、Twitterで投げ銭を行います。リンク対応、寄付募集リンク等にもご利用可能！" />
-    <meta name="twitter:image" content="./sensu_og.png">
+    <meta name="twitter:image" content="https://shinoharata.github.io/TipSensuWithTwitter/sensu_og.png">
 
     <!-- favicon編 -->
     <link rel="icon" type="image/x-icon" href="./favicon.ico">
@@ -115,7 +115,7 @@
                     <!-- <div class="form-group col-12 text-right">
                             参考：123.456 円
                         </div> -->
-                        <a v-bind:href="urlBase + code + '%20' + amount + '%20@' + name" class="btn bg-twitter text-white d-block">
+                    <a v-bind:href="urlBase + code + '%20' + amount + '%20@' + name" class="btn btn-primary d-block">
                         <i class="fab fa-twitter fa-lg"></i> Open with Twitter</a>
                 </div>
             </div>
@@ -123,8 +123,12 @@
         </div>
     </div>
     <div class="container text-center pt-5">
-        <h6><a href="https://github.com/ShinoharaTa/TipSensuWithTwitter">使い方、寄付リンクの設定方法(GitHub)</a></h6>
-        <h6>Copyright &copy; 2018 <a href="https://shinoharata.github.io/TipSensuWithTwitter/?name=SHINOHARATTT">Shino</a></h6>
+        <h6>
+            <a href="https://github.com/ShinoharaTa/TipSensuWithTwitter">使い方、寄付リンクの設定方法(GitHub)</a>
+        </h6>
+        <h6>Copyright &copy; 2018
+            <a href="https://shinoharata.github.io/TipSensuWithTwitter/?name=SHINOHARATTT">Shino</a>
+        </h6>
     </div>
     <!-- Modal -->
     <div class="modal fade" id="moneyListModal" tabindex="-1" role="dialog" aria-labelledby="moneyListModalLabel" aria-hidden="true">
