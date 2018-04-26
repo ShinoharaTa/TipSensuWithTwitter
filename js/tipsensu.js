@@ -141,13 +141,13 @@ var moneyCode = {
         "name": "NANJCOIN",
         "code": "NANJ",
         "active": false,
-        "imgUrl": "./img/notimage.png"
+        "imgUrl": "https://shinoharata.github.io/TipSensuWithTwitter/img/notimage.png"
     },
     "NCN": {
         "name": "Necony token",
         "code": "NCN",
         "active": false,
-        "imgUrl": "./img/notimage.png"
+        "imgUrl": "https://shinoharata.github.io/TipSensuWithTwitter/img/notimage.png"
     },
     "MONAT": {
         "name": "Monacoin-Testnet",
@@ -159,7 +159,7 @@ var moneyCode = {
         "name": "BitZeny-Testnet",
         "code": "ZNYT",
         "active": true,
-        "imgUrl": "./img/notimage.png"
+        "imgUrl": "https://shinoharata.github.io/TipSensuWithTwitter/img/notimage.png"
     }
 }
 
