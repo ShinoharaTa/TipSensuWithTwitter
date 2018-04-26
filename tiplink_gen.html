@@ -53,7 +53,7 @@
 <body>
     <svg xmlns="http://www.w3.org/2000/svg" style="position: absolute; width: 0; height: 0;" width="0" height="0">
         <symbol viewBox="0 0 1024 1024" id="icon-sensu">
-            <path class="icon-sensu" fill="#FFFFFF" d="M511.825,226.25c-223.734,0-417.412,128.548-511.245,315.806L511.822,797.75l511.598-255.001
+            <path class="icon-sensu" d="M511.825,226.25c-223.734,0-417.412,128.548-511.245,315.806L511.822,797.75l511.598-255.001
                     C929.719,355.114,735.836,226.25,511.825,226.25z" />
         </symbol>
     </svg>
@@ -76,47 +76,37 @@
             <div class="col-md-1 col-sm-12 col-lg-2 col-xl-3"></div>
             <div id="formdata" class="col-md-10 col-sm-12 col-lg-8 col-xl-6">
                 <div class="pt-3">
-                    <h4>To</h4>
-                    <div v-if="nameCheck === false">
-                        <input type="text" class="form-control" v-model="name" placeholder="Twitter account">
-                    </div>
-                    <div v-else>
-                        <input type="text" class="form-control" v-model="name" readonly>
-                    </div>
+                    <h4>Your Twitter account.</h4>
+                    <input type="text" class="form-control" v-model="name" placeholder="account">
                 </div>
                 <div class="pt-3">
-                    <h4>Money Code</h4>
-                    <div v-if="code !== ''">
-                        <div class="border rounded p-2 mb-3 d-flex justify-content-between">
-                            <div class="d-flex flex-row align-items-center">
-                                <div class="p-1">
-                                    <img :src="imgUrl" width="50px" height="auto">
-                                </div>
-                                <div class="p-1">
-                                    <p class="m-0 p-0">{{moneyName}}</p>
-                                    <p class="m-0 p-0">
-                                        <small>{{code}}</small>
-                                    </p>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#moneyListModal">Change</button>
-                        </div>
-                    </div>
-                    <div v-else>
-                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#moneyListModal">Please select coin.
-                            <br>Click here.</button>
-                    </div>
+                    <h5>QR Code</h5>
+                    <button type="button" class="btn btn-info btn-block btn-lg" id="button" data-toggle="modal" data-target="#moneyListModal">Generate QR Code.</button>
                 </div>
                 <div class="pt-3">
-                    <h4>Amount</h4>
-                    <input type="number" class="form-control" v-model="amount" step="0.00000001">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h5>Tip address</h5>
+                        <button class="btn btn-outline-info btn-sm" v-on:click="urlCopy(url)">
+                            <i class="far fa-copy"></i> Copy URL</button>
+                    </div>
+                    <textarea type="text" class="form-control" v-model="url" disabled></textarea>
                 </div>
                 <div class="pt-3">
-                    <!-- <div class="form-group col-12 text-right">
-                            参考：123.456 円
-                        </div> -->
-                    <a v-bind:href="urlBase + code + '%20' + amount + '%20@' + name" class="btn btn-primary d-block">
-                        <i class="fab fa-twitter fa-lg"></i> Open with Twitter</a>
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <h5>Tip a tags (html)</h5>
+                        <button class="btn btn-outline-info btn-sm" v-on:click="urlCopy(urlTipTag)">
+                            <i class="far fa-copy"></i> Copy URL</button>
+                    </div>
+                    <textarea type="text" class="form-control" v-model="urlTipTag" disabled></textarea>
+                </div>
+                <!-- <div class="pt-3">
+                    <div class="d-flex align-items-center justify-content-between mb-1">
+                        <button class="btn btn-outline-info btn-sm" v-on:click="urlCopy(urlTipTag)">
+                            <i class="far fa-copy"></i> Copy URL</button>
+                    </div>
+                    <textarea type="text" class="form-control" v-model="urlTipTag" disabled></textarea>
+                </div> -->
+                <div class="pt-3">
                 </div>
             </div>
             <div class="col-md-1 col-sm-12 col-lg-2 col-xl-3"></div>
@@ -135,56 +125,31 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="moneyListModalLabel">Select Code</h5>
+                    <!-- <h5 class="modal-title" id="moneyListModalLabel">TIP Address</h5> -->
+                    <h3 class="modal-title" id="moneyListModalLabel">Tip Sensu</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    <div class="row p-1" id="moneyList">
-                        <template v-for="list in lists">
-                            <div class="col-12 col-sm-6 p-2">
-                                <div v-if="list.active === true">
-                                    <button type="button" class="btn btn-outline-secondary btn-block" data-dismiss="modal" aria-label="Close" v-on:click="setCode(list.code, list.name, list.imgUrl)">
-                                        <div class="d-flex flex-row align-items-center">
-                                            <div class="p-1">
-                                                <img :src="list.imgUrl" width="40px" height="auto">
-                                            </div>
-                                            <div class="p-1">
-                                                <p class="m-0 p-0 text-left">{{list.name}}</p>
-                                                <p class="m-0 p-0 text-left">
-                                                    <small>{{list.code}}</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </button>
-                                </div>
-                                <div v-else>
-                                    <button type="button" class="btn btn-outline-secondary btn-block" disabled>
-                                        <div class="d-flex flex-row align-items-center">
-                                            <div class="p-1">
-                                                <img :src="list.imgUrl" width="40px" height="auto">
-                                            </div>
-                                            <div class="p-1">
-                                                <p class="m-0 p-0 text-left">{{list.name}}</p>
-                                                <p class="m-0 p-0 text-left">
-                                                    <small>{{list.code}}</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </template>
+                <div class="modal-body text-center">
+                    <h1>
+                        <svg class="sensu-large">
+                            <use xlink:href="#icon-sensu"></use>
+                        </svg>
+                    </h1>
+                    <div class="row p-3 text-center d-inline" id="tipQR">
+                    </div>
+                    <div class="pt-3">
+                    </div>
+                    <h5>TIP with Twitter Link</h5>
+                    <div class="pt-5">
                     </div>
                 </div>
-                <!-- <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div> -->
             </div>
         </div>
     </div>
-    <script src="./js/tipsensu.js"></script>
+    <script src="./js/jquery.qrcode.min.js"></script>
+    <script src="./js/gentipcontents.js"></script>
 </body>
 
 </html>
