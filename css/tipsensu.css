@@ -29,3 +29,7 @@
 .bg-twitter {
     background-color: #55acee;
 }
+
+canvas {
+    border: 1px solid #999;
+}

@@ -5,15 +5,15 @@ var tipData = new Vue({
         urlBase: 'https://shinoharata.github.io/TipSensuWithTwitter/?name=',
     },
     computed: {
-        url: function () {
+        url: function() {
             return this.urlBase + this.name;
         },
-        urlTipTag: function () {
+        urlTipTag: function() {
             return '<a href="' + this.urlBase + this.name + '" target="_blank">Tip Sensu</a>'
         }
     },
     methods: {
-        urlCopy: function (str) {
+        urlCopy: function(str) {
             var temp = document.createElement('div');
 
             temp.appendChild(document.createElement('pre')).textContent = str;
@@ -32,12 +32,11 @@ var tipData = new Vue({
             // return result;
         },
     },
-    created: function () {
-    }
+    created: function() {}
 });
 
-$('#button').on('click', function () {
+$('#button').on('click', function() {
     console.log(tipData.url);
     $("#tipQR").html("");
-    $("#tipQR").qrcode({ width: 200, height: 200, text: tipData.url });
+    $("#tipQR").qrcode({ width: 240, height: 240, text: tipData.url });
 });
