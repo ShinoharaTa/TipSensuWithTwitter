@@ -35,19 +35,15 @@
     <!-- Vue.js -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/tipsensu.css">
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- font awesome -->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl"
-        crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <script src="./js/tipsensu.js"></script>
 </head>
 
 <body>
@@ -75,74 +71,19 @@
         <div class="row">
             <div class="col-md-1 col-sm-12 col-lg-2 col-xl-3"></div>
             <div id="formdata" class="col-md-10 col-sm-12 col-lg-8 col-xl-6">
-                <div class="pt-3">
-                    <h4>To</h4>
-                    <div v-if="nameCheck === false">
-                        <input type="text" class="form-control" v-model="name" placeholder="Twitter account">
-                    </div>
-                    <div v-else>
-                        <input type="text" class="form-control" v-model="name" readonly>
-                    </div>
-                </div>
-                <div class="pt-3">
-                    <h4>Money Code</h4>
-                    <div v-if="code !== ''">
-                        <div class="border rounded p-2 mb-3 d-flex justify-content-between">
-                            <div class="d-flex flex-row align-items-center">
-                                <div class="p-1">
-                                    <img :src="imgUrl" width="50px" height="auto">
-                                </div>
-                                <div class="p-1">
-                                    <p class="m-0 p-0">{{moneyName}}</p>
-                                    <p class="m-0 p-0">
-                                        <small>{{code}}</small>
-                                    </p>
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#moneyListModal">Change</button>
-                        </div>
-                    </div>
-                    <div v-else>
-                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#moneyListModal">Please select coin.
-                            <br>Click here.</button>
-                    </div>
-                </div>
-                <div class="pt-3">
-                    <h4>Amount</h4>
-                    <input type="number" class="form-control" v-model="amount" step="0.00000001">
-                </div>
-                <div class="pt-3">
-                    <!-- <div class="form-group col-12 text-right">
-                            参考：123.456 円
-                        </div> -->
-                    <a v-bind:href="urlBase + code + '%20' + amount + '%20@' + name" class="btn btn-primary d-block">
-                        <i class="fab fa-twitter fa-lg"></i> Open with Twitter</a>
-                </div>
-            </div>
-            <div class="col-md-1 col-sm-12 col-lg-2 col-xl-3"></div>
-        </div>
-    </div>
-    <div class="container text-center pt-5">
-        <h6>
-            <a href="https://github.com/ShinoharaTa/TipSensuWithTwitter">使い方、寄付リンクの設定方法(GitHub)</a>
-        </h6>
-        <h6>Copyright &copy; 2018
-            <a href="https://shinoharata.github.io/TipSensuWithTwitter/?name=SHINOHARATTT">Shino</a>
-        </h6>
-    </div>
-    <!-- Modal -->
-    <div class="modal fade" id="moneyListModal" tabindex="-1" role="dialog" aria-labelledby="moneyListModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="moneyListModalLabel">Select Code</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <!-- Modal -->
+                <div class="modal fade" id="moneyListModal" tabindex="-1" role="dialog" aria-labelledby="moneyListModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="moneyListModalLabel">Select Code</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row p-1" id="moneyList">
-                        <template v-for="list in lists">
+                            </div>
+                            <div class="modal-body">
+                                <div class="row p-1" id="moneyList">
+                                    <template v-for="list in lists">
                             <div class="col-12 col-sm-6 p-2">
                                 <div v-if="list.active === true">
                                     <button type="button" class="btn btn-outline-secondary btn-block" data-dismiss="modal" aria-label="Close" v-on:click="setCode(list.code, list.name, list.imgUrl)">
@@ -176,15 +117,70 @@
                                 </div>
                             </div>
                         </template>
-                    </div>
-                </div>
-                <!-- <div class="modal-footer">
+                                </div>
+                            </div>
+                            <!-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div> -->
+                        </div>
+                    </div>
+                </div>
+                <!-- モーダルココまで -->
+                <div class="pt-3">
+                    <h4>To</h4>
+                    <div v-if="nameCheck === false">
+                        <input type="text" class="form-control" v-model="name" placeholder="Twitter account">
+                    </div>
+                    <div v-else>
+                        <input type="text" class="form-control" v-model="name" readonly>
+                    </div>
+                </div>
+                <div class="pt-3">
+                    <h4>Money Code</h4>
+                    <div v-if="money.code !== ''">
+                        <div class="border rounded p-2 mb-3 d-flex justify-content-between">
+                            <div class="d-flex flex-row align-items-center">
+                                <div class="p-1">
+                                    <img :src="money.imgUrl" width="50px" height="auto">
+                                </div>
+                                <div class="p-1">
+                                    <p class="m-0 p-0">{{money.name}}</p>
+                                    <p class="m-0 p-0">
+                                        <small>{{money.code}}</small>
+                                    </p>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#moneyListModal">Change</button>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#moneyListModal">Please select coin.
+                            <br>Click here.</button>
+                    </div>
+                </div>
+                <div class="pt-3">
+                    <h4>Amount</h4>
+                    <input type="number" class="form-control" v-model="amount" step="0.00000001">
+                </div>
+                <div class="pt-3">
+                    <!-- <div class="form-group col-12 text-right">
+                            参考：123.456 円
+                        </div> -->
+                    <a v-bind:href="urlBase + money.code + '%20' + amount + '%20@' + name" class="btn btn-primary d-block">
+                        <i class="fab fa-twitter fa-lg"></i> Open with Twitter</a>
+                </div>
             </div>
+            <div class="col-md-1 col-sm-12 col-lg-2 col-xl-3"></div>
         </div>
     </div>
-    <script src="./js/tipsensu.js"></script>
+    <div class="container text-center pt-5">
+        <h6>
+            <a href="https://github.com/ShinoharaTa/TipSensuWithTwitter">使い方、寄付リンクの設定方法(GitHub)</a>
+        </h6>
+        <h6>Copyright &copy; 2018
+            <a href="https://shinoharata.github.io/TipSensuWithTwitter/?name=SHINOHARATTT">Shino</a>
+        </h6>
+    </div>
 </body>
 
 </html>
