@@ -43,6 +43,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- font awesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <script src="./js/moneylist.js"></script>
 </head>
 
 <body>
@@ -85,7 +86,7 @@
                                     <template v-for="list in lists">
                             <div class="col-12 col-sm-6 p-2">
                                 <div v-if="list.active === true">
-                                    <button type="button" class="btn btn-outline-secondary btn-block" data-dismiss="modal" aria-label="Close" v-on:click="setCode(list.code, list.name, list.imgUrl)">
+                                    <button type="button" class="btn btn-outline-secondary btn-block" data-dismiss="modal" aria-label="Close" v-on:click="setCode(list.code)">
                                         <div class="d-flex flex-row align-items-center">
                                             <div class="p-1">
                                                 <img :src="list.imgUrl" width="40px" height="auto">

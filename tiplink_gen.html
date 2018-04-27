@@ -9,7 +9,7 @@
     <meta name="format-detection" content="telephone=no">
 
     <!-- SEO -->
-    <title>TIP SENSU with Twitter | Twitterで投げ銭しよう</title>
+    <title>TIP SENSU Link Generator | Twitterで投げ銭しよう</title>
     <meta name="keywords" content="">
     <meta name="description" content="投げ銭Bot Sensuを使用して、Twitterで投げ銭を行います。リンク対応、寄付募集リンク等にもご利用可能！">
     <meta name="author" content="Shino_JK">
@@ -17,15 +17,15 @@
 
     <!-- OGP -->
     <meta property="og:site_name" content="TIP SENSU with Twitter">
-    <meta property="og:title" content="TIP SENSU with Twitter | Twitterで投げ銭しよう">
+    <meta property="og:title" content="TIP SENSU Link Generator | Twitterで投げ銭しよう">
     <meta property="og:description" content="投げ銭Bot Sensuを使用して、Twitterで投げ銭を行います。リンク対応、寄付募集リンク等にもご利用可能！">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://github.com/ShinoharaTa/TipSensuWithTwitter">
+    <meta property="og:url" content="https://github.com/ShinoharaTa/TipSensuWithTwitter/tiplink_gen.html">
     <meta property="og:image" content="https://shinoharata.github.io/TipSensuWithTwitter/img/sensu_og.png">
     <!-- <meta property="fb:app_id" content="App-ID（15文字の半角数字）" /> -->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@SHINOHARATTT">
-    <meta name="twitter:title" content="TIP SENSU with Twitter | Twitterで投げ銭しよう" />
+    <meta name="twitter:title" content="TIP SENSU Link Generator | Twitterで投げ銭しよう" />
     <meta name="twitter:description" content="投げ銭Bot Sensuを使用して、Twitterで投げ銭を行います。リンク対応、寄付募集リンク等にもご利用可能！" />
     <meta name="twitter:image" content="https://shinoharata.github.io/TipSensuWithTwitter/img/sensu_og.png">
 
@@ -43,6 +43,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <!-- font awesome -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <script src="./js/moneylist.js"></script>
 </head>
 
 <body>
@@ -57,10 +58,10 @@
             <div class="row">
                 <div class="col-md-1 col-sm-12 col-lg-2 col-xl-3"></div>
                 <div class="col-md-10 col-sm-12 col-lg-8 col-xl-6">
-                    <h3 class="">
+                    <h4 class="">
                         <svg class="sensu-header">
                             <use xlink:href="#icon-sensu"></use>
-                        </svg> Tip Sensu</h3>
+                        </svg> Tip Sensu Link Generator</h4>
                 </div>
                 <div class="col-md-1 col-sm-12 col-lg-2 col-xl-3"></div>
             </div>
@@ -70,13 +71,109 @@
         <div class="row">
             <div class="col-md-1 col-sm-12 col-lg-2 col-xl-3"></div>
             <div id="formdata" class="col-md-10 col-sm-12 col-lg-8 col-xl-6">
-                <div class="pt-3">
-                    <h4>Your Twitter account.</h4>
-                    <input type="text" class="form-control" v-model="name" placeholder="account">
+                <!-- Modal -->
+                <div class="modal fade" id="moneyListModal" tabindex="-1" role="dialog" aria-labelledby="moneyListModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="moneyListModalLabel">Select Code</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row p-1" id="moneyList">
+                                    <template v-for="list in lists">
+                            <div class="col-12 col-sm-6 p-2">
+                                <div v-if="list.active === true">
+                                    <button type="button" class="btn btn-outline-secondary btn-block" data-dismiss="modal" aria-label="Close" v-on:click="setCode(list.code)">
+                                        <div class="d-flex flex-row align-items-center">
+                                            <div class="p-1">
+                                                <img :src="list.imgUrl" width="40px" height="auto">
+                                            </div>
+                                            <div class="p-1">
+                                                <p class="m-0 p-0 text-left">{{list.name}}</p>
+                                                <p class="m-0 p-0 text-left">
+                                                    <small>{{list.code}}</small>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                                <div v-else>
+                                    <button type="button" class="btn btn-outline-secondary btn-block" disabled>
+                                        <div class="d-flex flex-row align-items-center">
+                                            <div class="p-1">
+                                                <img :src="list.imgUrl" width="40px" height="auto">
+                                            </div>
+                                            <div class="p-1">
+                                                <p class="m-0 p-0 text-left">{{list.name}}</p>
+                                                <p class="m-0 p-0 text-left">
+                                                    <small>{{list.code}}</small>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </button>
+                                </div>
+                            </div>
+                        </template>
+                                </div>
+                            </div>
+                            <!-- <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div> -->
+                        </div>
+                    </div>
                 </div>
                 <div class="pt-3">
+                    <h4>Twitter Account Setting</h4>
+                </div>
+                <div class="pt-3 form-row">
+                    <label for="account" class="col-sm-4 col-form-label">Twitter <small>(important)</small></label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" v-model="name" placeholder="account">
+                    </div>
+                </div>
+                <div class="pt-3 form-row">
+                    <label for="money" class="col-sm-4 col-form-label">Money Code</label>
+                    <div class="col-sm-8">
+
+                        <div v-if="money.code === ''">
+                            <button type="button" class="btn btn-success btn-block" data-toggle="modal" data-target="#moneyListModal">Please select coin.
+                            Click here.</button>
+                        </div>
+                        <div v-else>
+                            <div class="border rounded p-2 d-flex justify-content-between">
+                                <div class="d-flex flex-row align-items-center">
+                                    <div class="p-1">
+                                        <img :src="money.imgUrl" width="50px" height="auto">
+                                    </div>
+                                    <div class="p-1">
+                                        <p class="m-0 p-0">{{money.name}}</p>
+                                        <p class="m-0 p-0">
+                                            <small>{{money.code}}</small>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="d-flex flex-row align-items-streach">
+                                    <button type="button" class="btn btn-outline-danger" v-on:click="clearCode()">Clear</button>
+                                    <div class="p-1"></div>
+                                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#moneyListModal">Change</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-3 form-row">
+                    <label for="amount" class="col-sm-4 col-form-label">Set Amount</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" v-model="amount" placeholder="">
+                    </div>
+                </div>
+                <hr>
+                <div class="pt-3">
                     <h5>QR Code</h5>
-                    <button type="button" class="btn btn-info btn-block btn-lg" id="button" data-toggle="modal" data-target="#moneyListModal">Generate QR Code.</button>
+                    <button type="button" class="btn btn-info btn-block btn-lg" id="button" data-toggle="modal" data-target="#generateQRModal">Generate QR Code.</button>
                 </div>
                 <div class="pt-3">
                     <div class="d-flex align-items-center justify-content-between mb-1">
@@ -116,12 +213,11 @@
         </h6>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="moneyListModal" tabindex="-1" role="dialog" aria-labelledby="moneyListModalLabel" aria-hidden="true">
+    <div class="modal fade" id="generateQRModal" tabindex="-1" role="dialog" aria-labelledby="generateQRModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <!-- <h5 class="modal-title" id="moneyListModalLabel">TIP Address</h5> -->
-                    <h3 class="modal-title" id="moneyListModalLabel">Tip Sensu</h3>
+                    <h3 class="modal-title" id="generateQRModalLabel">Tip Sensu</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

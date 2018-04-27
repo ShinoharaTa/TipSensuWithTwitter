@@ -3,13 +3,29 @@ var tipData = new Vue({
     data: {
         name: '',
         urlBase: 'https://shinoharata.github.io/TipSensuWithTwitter/?name=',
+        urlBuff: '', 
+        amount: '',
+        lists: [],
+        money: {
+            name: '',
+            code: '',
+            imgUrl: '',
+        }
     },
     computed: {
         url: function() {
-            return this.urlBase + this.name;
+            var gen_url = this.urlBase + this.name;
+            if(this.money.code != ''){
+                gen_url = gen_url + '&code=' + this.money.code;
+            }
+            if(this.amount != ''){
+                gen_url = gen_url + '&amount=' + this.amount;
+            }
+            // this.urlBuff = gen_url;
+            return gen_url;
         },
         urlTipTag: function() {
-            return '<a href="' + this.urlBase + this.name + '" target="_blank">Tip Sensu</a>'
+            return '<a href="' + this.url + '" target="_blank">Tip Sensu</a>'
         }
     },
     methods: {
@@ -31,8 +47,21 @@ var tipData = new Vue({
             // true なら実行できている falseなら失敗か対応していないか
             // return result;
         },
+        setCode: function(str) {
+            this.money.code = moneyCode[str].code;
+            this.money.name = moneyCode[str].name;
+            this.money.imgUrl = moneyCode[str].imgUrl;
+            // tipData.activeCheck();
+        },
+        clearCode: function(){
+            this.money.code = '';
+            this.money.name = '';
+            this.money.imgUrl = '';
+        }
     },
-    created: function() {}
+    created: function() {
+        this.lists = moneyCode;
+    }
 });
 
 $('#button').on('click', function() {
